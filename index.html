@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FrameRate — Animation News</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --ink: #1a1208;
+    --cream: #f5f0e8;
+    --cream2: #ece6d8;
+    --orange: #e8521a;
+    --orange-dark: #b33e10;
+    --muted: #6b6255;
+    --border: rgba(26,18,8,0.15);
+    --border-strong: rgba(26,18,8,0.3);
+  }
+  body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--ink); min-height: 100vh; overflow-x: hidden; }
+
+  nav { background: var(--ink); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 56px; position: sticky; top: 0; z-index: 100; }
+  .logo { font-family: 'Bebas Neue', sans-serif; font-size: 26px; color: var(--cream); letter-spacing: 2px; display: flex; align-items: center; gap: 8px; }
+  .logo-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--orange); display: inline-block; }
+  .nav-links { display: flex; gap: 28px; list-style: none; }
+  .nav-links a { color: rgba(245,240,232,0.65); text-decoration: none; font-size: 13px; font-weight: 500; letter-spacing: 0.5px; text-transform: uppercase; }
+  .nav-date { color: rgba(245,240,232,0.45); font-size: 12px; }
+
+  .ticker-wrap { background: var(--orange); overflow: hidden; height: 32px; display: flex; align-items: center; }
+  .ticker-label { background: var(--orange-dark); color: var(--cream); font-size: 11px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; padding: 0 14px; white-space: nowrap; height: 100%; display: flex; align-items: center; flex-shrink: 0; }
+  .ticker-track { display: flex; animation: ticker 40s linear infinite; white-space: nowrap; }
+  .ticker-track span { font-size: 12px; color: var(--cream); padding: 0 32px; }
+  .ticker-track span::before { content: '◆ '; opacity: 0.6; }
+  @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  .hero { display: grid; grid-template-columns: 1fr 380px; border-bottom: 1px solid var(--border-strong); }
+  .hero-main { border-right: 1px solid var(--border-strong); position: relative; overflow: hidden; min-height: 460px; cursor: pointer; background: #2a1f0e; }
+  .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(26,18,8,0.95) 0%, rgba(26,18,8,0.3) 60%, transparent 100%); display: flex; flex-direction: column; justify-content: flex-end; padding: 2rem; }
+  .hero-icon { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -60%); opacity: 0.08; }
+  .hero-tag { display: inline-block; background: var(--orange); color: var(--cream); font-size: 10px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; padding: 4px 10px; border-radius: 3px; margin-bottom: 14px; width: fit-content; }
+  .hero-title { font-family: 'DM Serif Display', serif; font-size: 34px; line-height: 1.2; color: var(--cream); margin-bottom: 12px; }
+  .hero-excerpt { font-size: 14px; line-height: 1.6; color: rgba(245,240,232,0.7); margin-bottom: 14px; }
+  .hero-meta { font-size: 13px; color: rgba(245,240,232,0.55); display: flex; gap: 14px; align-items: center; }
+  .hero-meta-dot { width: 3px; height: 3px; border-radius: 50%; background: rgba(245,240,232,0.35); }
+  .hero-link { color: var(--orange); text-decoration: none; font-size: 13px; font-weight: 500; }
+  .hero-link:hover { text-decoration: underline; }
+
+  .hero-sidebar { display: flex; flex-direction: column; }
+  .sidebar-story { padding: 1.1rem 1.4rem; border-bottom: 1px solid var(--border); cursor: pointer; transition: background 0.15s; flex: 1; }
+  .sidebar-story:hover { background: var(--cream2); }
+  .sidebar-story:last-child { border-bottom: none; }
+  .sidebar-tag { font-size: 10px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; color: var(--orange); margin-bottom: 5px; }
+  .sidebar-title { font-family: 'DM Serif Display', serif; font-size: 17px; line-height: 1.3; color: var(--ink); margin-bottom: 6px; }
+  .sidebar-meta { font-size: 12px; color: var(--muted); }
+  .sidebar-link { color: var(--orange); text-decoration: none; font-size: 12px; }
+
+  .categories { display: flex; border-bottom: 1px solid var(--border-strong); overflow-x: auto; }
+  .cat-pill { padding: 0.75rem 1.4rem; font-size: 12px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); cursor: pointer; border-right: 1px solid var(--border); white-space: nowrap; transition: all 0.15s; }
+  .cat-pill:hover { background: var(--cream2); color: var(--ink); }
+  .cat-pill.active { background: var(--ink); color: var(--cream); }
+
+  .section-header { display: flex; align-items: center; gap: 12px; padding: 1.4rem 2rem 1rem; border-bottom: 1px solid var(--border); }
+  .section-title { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 2px; color: var(--ink); }
+  .section-line { flex: 1; height: 1px; background: var(--border-strong); }
+  .updated-tag { font-size: 11px; color: var(--muted); font-style: italic; }
+
+  .cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); border-bottom: 1px solid var(--border-strong); }
+  .card { padding: 1.5rem 2rem; border-right: 1px solid var(--border); cursor: pointer; transition: background 0.15s; }
+  .card:last-child { border-right: none; }
+  .card:hover { background: var(--cream2); }
+  .card-source-badge { display: inline-block; background: var(--cream2); border: 1px solid var(--border); border-radius: 3px; font-size: 10px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); padding: 3px 8px; margin-bottom: 10px; }
+  .card-tag { font-size: 10px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; color: var(--orange); margin-bottom: 8px; }
+  .card-title { font-family: 'DM Serif Display', serif; font-size: 19px; line-height: 1.35; color: var(--ink); margin-bottom: 10px; }
+  .card-excerpt { font-size: 13px; line-height: 1.65; color: var(--muted); margin-bottom: 12px; }
+  .card-meta { font-size: 12px; color: var(--muted); border-top: 1px solid var(--border); padding-top: 10px; display: flex; justify-content: space-between; align-items: center; }
+  .card-link { color: var(--orange); text-decoration: none; font-size: 12px; font-weight: 500; }
+  .card-link:hover { text-decoration: underline; }
+
+  .wide-stories { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1px solid var(--border-strong); }
+  .wide-story { display: flex; flex-direction: column; gap: 6px; padding: 1.25rem 2rem; border-right: 1px solid var(--border); cursor: pointer; transition: background 0.15s; }
+  .wide-story:hover { background: var(--cream2); }
+  .wide-story:last-child { border-right: none; }
+  .wide-story-tag { font-size: 10px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; color: var(--orange); }
+  .wide-story-title { font-family: 'DM Serif Display', serif; font-size: 16px; line-height: 1.35; color: var(--ink); }
+  .wide-story-meta { font-size: 12px; color: var(--muted); display: flex; justify-content: space-between; }
+  .wide-story-link { color: var(--orange); text-decoration: none; font-size: 12px; font-weight: 500; }
+
+  .no-news { padding: 3rem 2rem; text-align: center; color: var(--muted); font-style: italic; }
+
+  footer { background: var(--ink); padding: 3rem 2rem; color: rgba(245,240,232,0.6); display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 2rem; }
+  .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 28px; color: var(--cream); letter-spacing: 2px; margin-bottom: 0.5rem; }
+  .footer-tagline { font-size: 13px; line-height: 1.6; }
+  .footer-col-title { font-size: 11px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color: var(--cream); margin-bottom: 1rem; }
+  .footer-links { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .footer-links a { font-size: 13px; color: rgba(245,240,232,0.55); text-decoration: none; }
+  .footer-bottom { background: rgba(0,0,0,0.25); padding: 1rem 2rem; display: flex; justify-content: space-between; font-size: 12px; color: rgba(245,240,232,0.35); }
+
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero-main { min-height: 320px; }
+    .hero-sidebar { display: none; }
+    .cards-grid { grid-template-columns: 1fr; }
+    .card { border-right: none; border-bottom: 1px solid var(--border); }
+    .wide-stories { grid-template-columns: 1fr; }
+    .wide-story { border-right: none; border-bottom: 1px solid var(--border); }
+    footer { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo"><span class="logo-dot"></span>FRAMERATE</div>
+  <ul class="nav-links">
+    <li><a href="#">Film</a></li>
+    <li><a href="#">TV & Streaming</a></li>
+    <li><a href="#">Anime</a></li>
+    <li><a href="#">Industry</a></li>
+    <li><a href="#">Festivals</a></li>
+  </ul>
+  <span class="nav-date" id="nav-date"></span>
+</nav>
+
+<div class="ticker-wrap">
+  <div class="ticker-label">Latest</div>
+  <div style="overflow:hidden;flex:1;display:flex;align-items:center;">
+    <div class="ticker-track" id="ticker-track">
+      <!-- TICKER_ITEMS -->
+    </div>
+  </div>
+</div>
+
+<!-- HERO STORY -->
+<div class="hero">
+  <div class="hero-main">
+    <svg class="hero-icon" width="260" height="260" viewBox="0 0 200 200" fill="none">
+      <rect x="10" y="40" width="180" height="120" rx="8" stroke="white" stroke-width="4"/>
+      <rect x="10" y="55" width="180" height="6" stroke="white" stroke-width="3"/>
+      <rect x="10" y="139" width="180" height="6" stroke="white" stroke-width="3"/>
+      <rect x="20" y="40" width="10" height="15" fill="white"/>
+      <rect x="40" y="40" width="10" height="15" fill="white"/>
+      <rect x="60" y="40" width="10" height="15" fill="white"/>
+      <rect x="130" y="40" width="10" height="15" fill="white"/>
+      <rect x="150" y="40" width="10" height="15" fill="white"/>
+      <rect x="170" y="40" width="10" height="15" fill="white"/>
+      <rect x="20" y="145" width="10" height="15" fill="white"/>
+      <rect x="40" y="145" width="10" height="15" fill="white"/>
+      <rect x="60" y="145" width="10" height="15" fill="white"/>
+      <rect x="130" y="145" width="10" height="15" fill="white"/>
+      <rect x="150" y="145" width="10" height="15" fill="white"/>
+      <rect x="170" y="145" width="10" height="15" fill="white"/>
+      <circle cx="100" cy="100" r="28" stroke="white" stroke-width="4"/>
+      <polygon points="92,88 116,100 92,112" fill="white"/>
+    </svg>
+    <div class="hero-overlay">
+      <!-- HERO_CONTENT -->
+    </div>
+  </div>
+  <div class="hero-sidebar" id="hero-sidebar">
+    <!-- SIDEBAR_STORIES -->
+  </div>
+</div>
+
+<!-- CATEGORIES -->
+<div class="categories">
+  <div class="cat-pill active">All</div>
+  <div class="cat-pill">Film</div>
+  <div class="cat-pill">TV & Streaming</div>
+  <div class="cat-pill">Anime</div>
+  <div class="cat-pill">Industry</div>
+  <div class="cat-pill">Technology</div>
+  <div class="cat-pill">Festivals</div>
+  <div class="cat-pill">Indie</div>
+</div>
+
+<!-- LATEST STORIES -->
+<div class="section-header">
+  <span class="section-title">Latest Stories</span>
+  <div class="section-line"></div>
+  <span class="updated-tag" id="updated-tag"></span>
+</div>
+<div class="cards-grid" id="cards-grid">
+  <!-- CARDS -->
+</div>
+
+<!-- MORE STORIES -->
+<div class="section-header">
+  <span class="section-title">More Today</span>
+  <div class="section-line"></div>
+</div>
+<div class="wide-stories" id="wide-stories">
+  <!-- WIDE_STORIES -->
+</div>
+
+<footer>
+  <div>
+    <div class="footer-logo">FRAMERATE</div>
+    <div class="footer-tagline">Your daily animation news digest — updated every morning automatically from the best sources in the industry.</div>
+  </div>
+  <div>
+    <div class="footer-col-title">Sources</div>
+    <ul class="footer-links">
+      <li><a href="https://www.cartoonbrew.com" target="_blank">Cartoon Brew</a></li>
+      <li><a href="https://www.awn.com" target="_blank">Animation World Network</a></li>
+      <li><a href="https://deadline.com/category/animation/" target="_blank">Deadline Animation</a></li>
+      <li><a href="https://variety.com/v/animation/" target="_blank">Variety Animation</a></li>
+    </ul>
+  </div>
+  <div>
+    <div class="footer-col-title">Info</div>
+    <ul class="footer-links">
+      <li><a>Updates daily at 8am UTC</a></li>
+      <li><a>Personal news digest</a></li>
+      <li><a>Built with GitHub Actions</a></li>
+    </ul>
+  </div>
+</footer>
+<div class="footer-bottom">
+  <span>FrameRate — melanozen1's personal animation digest</span>
+  <span id="footer-date"></span>
+</div>
+
+<script>
+  const today = new Date();
+  const opts = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+  const dateStr = today.toLocaleDateString('en-US', opts);
+  document.getElementById('nav-date').textContent = dateStr;
+  document.getElementById('footer-date').textContent = '© ' + today.getFullYear();
+  document.getElementById('updated-tag').textContent = 'Updated ' + dateStr;
+
+  document.querySelectorAll('.cat-pill').forEach(pill => {
+    pill.addEventListener('click', function() {
+      document.querySelectorAll('.cat-pill').forEach(p => p.classList.remove('active'));
+      this.classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>
