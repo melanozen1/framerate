@@ -204,7 +204,7 @@ def build_cards(stories: list) -> str:
     html = ""
     for s in stories:
         html += f"""
-  <div class="card">
+  <div class="card" data-tag="{s['tag']}">
     <div class="card-source-badge">{s['source']}</div>
     <div class="card-tag">{s['tag']}</div>
     <div class="card-title">{s['title']}</div>
@@ -223,7 +223,7 @@ def build_wide(stories: list) -> str:
     html = ""
     for s in stories:
         html += f"""
-  <div class="wide-story">
+  <div class="wide-story" data-tag="{s['tag']}">
     <div class="wide-story-tag">{s['tag']}</div>
     <div class="wide-story-title">{s['title']}</div>
     <div class="wide-story-meta">
