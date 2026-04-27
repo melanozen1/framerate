@@ -12,7 +12,6 @@
     --bg2: #13161e;
     --bg3: #1a1e2a;
     --surface: #1e2230;
-    --surface2: #252a3a;
     --accent: #4f8ef7;
     --accent2: #7b5cf0;
     --gold: #e4b84a;
@@ -26,6 +25,7 @@
   }
   body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; overflow-x: hidden; }
 
+  /* NAV */
   nav { background: rgba(13,15,20,0.97); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 54px; position: sticky; top: 0; z-index: 100; }
   .logo { font-family: 'Bebas Neue', sans-serif; font-size: 24px; letter-spacing: 4px; background: linear-gradient(90deg, #4f8ef7, #7b5cf0); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
   .nav-links { display: flex; gap: 24px; list-style: none; }
@@ -33,6 +33,7 @@
   .nav-links a:hover { color: var(--text); }
   .nav-date { color: var(--text3); font-size: 12px; }
 
+  /* TICKER */
   .ticker-wrap { background: var(--bg2); border-bottom: 1px solid var(--border); overflow: hidden; height: 30px; display: flex; align-items: center; }
   .ticker-label { background: var(--accent); color: #fff; font-size: 10px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; padding: 0 12px; white-space: nowrap; height: 100%; display: flex; align-items: center; flex-shrink: 0; }
   .ticker-track { display: flex; animation: ticker 50s linear infinite; white-space: nowrap; }
@@ -40,58 +41,71 @@
   .ticker-track span::before { content: '// '; color: var(--accent); font-weight: 600; }
   @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
+  /* HERO */
   .hero { display: grid; grid-template-columns: 1fr 360px; border-bottom: 1px solid var(--border); }
-  .hero-main { border-right: 1px solid var(--border); position: relative; overflow: hidden; min-height: 440px; cursor: pointer; background: var(--bg2); }
-  .hero-bg-gfx { position: absolute; inset: 0; background: radial-gradient(ellipse at 30% 60%, rgba(79,142,247,0.12) 0%, transparent 60%), radial-gradient(ellipse at 80% 20%, rgba(123,92,240,0.1) 0%, transparent 50%); }
-  .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(13,15,20,0.98) 0%, rgba(13,15,20,0.5) 55%, transparent 100%); display: flex; flex-direction: column; justify-content: flex-end; padding: 2rem; }
+  .hero-main { border-right: 1px solid var(--border); position: relative; overflow: hidden; min-height: 460px; cursor: pointer; background: var(--bg2); }
+  .hero-img-wrap { position: absolute; inset: 0; background-size: cover; background-position: center; transition: transform 0.5s ease; }
+  .hero-main:hover .hero-img-wrap { transform: scale(1.03); }
+  .hero-bg-gfx { position: absolute; inset: 0; background: radial-gradient(ellipse at 30% 60%, rgba(79,142,247,0.15) 0%, transparent 60%), radial-gradient(ellipse at 80% 20%, rgba(123,92,240,0.12) 0%, transparent 50%); pointer-events: none; }
+  .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(13,15,20,0.98) 0%, rgba(13,15,20,0.55) 50%, rgba(13,15,20,0.1) 100%); display: flex; flex-direction: column; justify-content: flex-end; padding: 2rem; }
   .hero-tag { display: inline-flex; align-items: center; gap: 6px; background: rgba(79,142,247,0.15); border: 1px solid rgba(79,142,247,0.3); color: var(--accent); font-size: 10px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; padding: 4px 10px; border-radius: 4px; margin-bottom: 14px; width: fit-content; }
   .hero-tag::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); animation: blink 2s infinite; }
   @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
   .hero-title { font-family: 'DM Serif Display', serif; font-size: 32px; line-height: 1.2; color: var(--text); margin-bottom: 12px; }
   .hero-excerpt { font-size: 14px; line-height: 1.65; color: var(--text2); margin-bottom: 16px; max-width: 600px; }
-  .hero-meta { font-size: 12px; color: var(--text3); display: flex; gap: 14px; align-items: center; }
+  .hero-meta { font-size: 12px; color: var(--text3); display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
   .hero-meta-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--text3); }
   .hero-link { color: var(--accent); text-decoration: none; font-size: 12px; font-weight: 600; }
   .hero-link:hover { text-decoration: underline; }
 
-  .hero-sidebar { display: flex; flex-direction: column; background: var(--bg2); }
-  .sidebar-story { padding: 1rem 1.25rem; border-bottom: 1px solid var(--border); cursor: pointer; transition: background 0.15s; flex: 1; }
+  /* SIDEBAR */
+  .hero-sidebar { display: flex; flex-direction: column; background: var(--bg2); overflow: hidden; }
+  .sidebar-story { padding: 0.9rem 1.1rem; border-bottom: 1px solid var(--border); cursor: pointer; transition: background 0.15s; flex: 1; }
   .sidebar-story:hover { background: var(--bg3); }
   .sidebar-story:last-child { border-bottom: none; }
-  .sidebar-tag { font-size: 10px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent); margin-bottom: 5px; }
-  .sidebar-title { font-family: 'DM Serif Display', serif; font-size: 15px; line-height: 1.35; color: var(--text); margin-bottom: 6px; }
+  .sidebar-tag { font-size: 10px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent); margin-bottom: 4px; }
+  .sidebar-title { font-family: 'DM Serif Display', serif; font-size: 14px; line-height: 1.35; color: var(--text); margin-bottom: 5px; }
   .sidebar-meta { font-size: 11px; color: var(--text3); }
   .sidebar-link { color: var(--accent); text-decoration: none; font-size: 11px; }
+  .sidebar-thumb { width: 64px; height: 46px; object-fit: cover; border-radius: 3px; flex-shrink: 0; }
 
+  /* CATEGORIES */
   .categories { display: flex; border-bottom: 1px solid var(--border); background: var(--bg2); overflow-x: auto; }
   .cat-pill { padding: 0.7rem 1.25rem; font-size: 11px; font-weight: 600; letter-spacing: 1.2px; text-transform: uppercase; color: var(--text3); cursor: pointer; border-right: 1px solid var(--border); white-space: nowrap; transition: all 0.15s; }
   .cat-pill:hover { background: var(--bg3); color: var(--text2); }
   .cat-pill.active { background: var(--accent); color: #fff; }
 
+  /* SECTION HEADERS */
   .section-header { display: flex; align-items: center; gap: 12px; padding: 1.25rem 2rem 0.75rem; border-bottom: 1px solid var(--border); }
   .section-title { font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 3px; color: var(--text); }
   .section-line { flex: 1; height: 1px; background: var(--border2); }
   .section-tag { font-size: 10px; color: var(--text3); font-style: italic; }
 
+  /* CARDS */
   .cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); border-bottom: 1px solid var(--border); }
-  .card { padding: 1.5rem; border-right: 1px solid var(--border); cursor: pointer; transition: background 0.15s; }
+  .card { border-right: 1px solid var(--border); cursor: pointer; transition: background 0.15s; display: flex; flex-direction: column; }
   .card:last-child { border-right: none; }
   .card:hover { background: var(--bg2); }
-  .card-source { display: inline-block; background: var(--surface); border-radius: 3px; font-size: 10px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--text3); padding: 3px 8px; margin-bottom: 10px; }
+  .card-img { width: 100%; aspect-ratio: 16/9; overflow: hidden; background: var(--bg3); flex-shrink: 0; }
+  .card-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s ease; }
+  .card:hover .card-img img { transform: scale(1.04); }
+  .card-body { padding: 1.25rem 1.5rem; flex: 1; display: flex; flex-direction: column; }
+  .card-source { display: inline-block; background: var(--surface); border-radius: 3px; font-size: 10px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--text3); padding: 3px 8px; margin-bottom: 8px; }
   .card-tag { font-size: 10px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
-  .card-title { font-family: 'DM Serif Display', serif; font-size: 18px; line-height: 1.35; color: var(--text); margin-bottom: 10px; }
-  .card-excerpt { font-size: 13px; line-height: 1.65; color: var(--text2); margin-bottom: 12px; }
-  .card-meta { font-size: 11px; color: var(--text3); border-top: 1px solid var(--border); padding-top: 10px; display: flex; justify-content: space-between; align-items: center; }
+  .card-title { font-family: 'DM Serif Display', serif; font-size: 17px; line-height: 1.35; color: var(--text); margin-bottom: 8px; }
+  .card-excerpt { font-size: 13px; line-height: 1.65; color: var(--text2); margin-bottom: 12px; flex: 1; }
+  .card-meta { font-size: 11px; color: var(--text3); border-top: 1px solid var(--border); padding-top: 10px; display: flex; justify-content: space-between; align-items: center; margin-top: auto; }
   .card-link { color: var(--accent); text-decoration: none; font-size: 11px; font-weight: 600; }
   .card-link:hover { text-decoration: underline; }
 
+  /* WIDE STORIES */
   .wide-stories { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1px solid var(--border); }
-  .wide-story { display: flex; flex-direction: column; gap: 5px; padding: 1.1rem 1.5rem; border-right: 1px solid var(--border); cursor: pointer; transition: background 0.15s; }
+  .wide-story { padding: 1rem 1.5rem; border-right: 1px solid var(--border); cursor: pointer; transition: background 0.15s; }
   .wide-story:hover { background: var(--bg2); }
   .wide-story:last-child { border-right: none; }
   .wide-story-tag { font-size: 10px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent); }
-  .wide-story-title { font-family: 'DM Serif Display', serif; font-size: 15px; line-height: 1.35; color: var(--text); }
-  .wide-story-meta { font-size: 11px; color: var(--text3); display: flex; justify-content: space-between; align-items: center; margin-top: 2px; }
+  .wide-story-title { font-family: 'DM Serif Display', serif; font-size: 15px; line-height: 1.35; color: var(--text); margin: 4px 0; }
+  .wide-story-meta { font-size: 11px; color: var(--text3); display: flex; justify-content: space-between; align-items: center; margin-top: 4px; }
   .wide-story-link { color: var(--accent); text-decoration: none; font-size: 11px; font-weight: 600; }
 
   /* BREAKDOWNS */
@@ -111,19 +125,20 @@
   .artwork-section { border-bottom: 1px solid var(--border); }
   .artwork-intro { padding: 0 2rem 1rem; font-size: 13px; color: var(--text3); }
   .artwork-grid { display: grid; grid-template-columns: repeat(4, 1fr); }
-  .artwork-card { position: relative; aspect-ratio: 4/3; overflow: hidden; cursor: pointer; border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); background: var(--bg2); }
+  .artwork-card { position: relative; aspect-ratio: 4/3; overflow: hidden; cursor: pointer; border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); background: var(--bg2); text-decoration: none; display: block; }
   .artwork-card:nth-child(4n) { border-right: none; }
+  .artwork-img-wrap { width: 100%; height: 100%; }
+  .artwork-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s ease; }
+  .artwork-card:hover .artwork-img-wrap img { transform: scale(1.06); }
+  .artwork-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(13,15,20,0.97) 0%, rgba(13,15,20,0.4) 55%, transparent 100%); display: flex; flex-direction: column; justify-content: flex-end; padding: 0.85rem; opacity: 0; transition: opacity 0.3s ease; }
   .artwork-card:hover .artwork-overlay { opacity: 1; }
-  .artwork-bg { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; transition: transform 0.4s ease; }
-  .artwork-card:hover .artwork-bg { transform: scale(1.05); }
-  .artwork-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(13,15,20,0.97) 0%, rgba(13,15,20,0.5) 55%, transparent 100%); display: flex; flex-direction: column; justify-content: flex-end; padding: 1rem; opacity: 0; transition: opacity 0.3s ease; }
-  .artwork-always-show { opacity: 1 !important; }
   .artwork-artist { font-size: 13px; font-weight: 600; color: var(--text); }
-  .artwork-title-art { font-size: 12px; color: var(--text2); margin-bottom: 6px; }
+  .artwork-title-art { font-size: 12px; color: var(--text2); margin-bottom: 5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .artwork-platform { display: inline-block; font-size: 10px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--gold); border: 1px solid rgba(228,184,74,0.3); background: rgba(228,184,74,0.08); padding: 2px 7px; border-radius: 3px; }
 
   .no-news { padding: 2.5rem 2rem; text-align: center; color: var(--text3); font-style: italic; grid-column: 1 / -1; }
 
+  /* FOOTER */
   footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 2.5rem 2rem; color: var(--text3); display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 2rem; }
   .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 26px; letter-spacing: 4px; background: linear-gradient(90deg, #4f8ef7, #7b5cf0); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 0.5rem; }
   .footer-tagline { font-size: 12px; line-height: 1.7; }
@@ -137,7 +152,8 @@
     .hero { grid-template-columns: 1fr; }
     .hero-sidebar { display: none; }
     .cards-grid, .breakdown-grid { grid-template-columns: 1fr; }
-    .card, .breakdown-card { border-right: none; border-bottom: 1px solid var(--border); }
+    .card { border-right: none; border-bottom: 1px solid var(--border); }
+    .breakdown-card { border-right: none; border-bottom: 1px solid var(--border); }
     .wide-stories { grid-template-columns: 1fr; }
     .wide-story { border-right: none; border-bottom: 1px solid var(--border); }
     .artwork-grid { grid-template-columns: repeat(2, 1fr); }
@@ -164,46 +180,16 @@
 <div class="ticker-wrap">
   <div class="ticker-label">Live</div>
   <div style="overflow:hidden;flex:1;display:flex;align-items:center;">
-    <div class="ticker-track" id="ticker-track"><span>FMX is around the corner</span><span>VFXShow 303: Hail Mary</span><span>Delivering Apple Immersive Video for streaming: a new practical workflow</span><span>NVIDIA’s new real-time neural rendering with DLSS 5</span><span>fxpodcast: going underground with Hijack</span><span>And the winner is …</span><span>Immersive drama: more than VR — more than film</span><span>Fallout Season 2 with VFX Supervisor Jay Worth</span><span>Nuke 17 with Foundry Creative Director Juan Salazar</span><span>Judged by AI: 90 minutes to prove innocence: the VFX of Mercy</span><span>On The Set Pic: ‘Apex’</span><span>Enter the Guardian</span><span>On The Set Pic: ‘Masters of the Universe’</span><span>How ‘War Machine’ was made</span><span>FMX is around the corner</span><span>VFXShow 303: Hail Mary</span><span>Delivering Apple Immersive Video for streaming: a new practical workflow</span><span>NVIDIA’s new real-time neural rendering with DLSS 5</span><span>fxpodcast: going underground with Hijack</span><span>And the winner is …</span><span>Immersive drama: more than VR — more than film</span><span>Fallout Season 2 with VFX Supervisor Jay Worth</span><span>Nuke 17 with Foundry Creative Director Juan Salazar</span><span>Judged by AI: 90 minutes to prove innocence: the VFX of Mercy</span><span>On The Set Pic: ‘Apex’</span><span>Enter the Guardian</span><span>On The Set Pic: ‘Masters of the Universe’</span><span>How ‘War Machine’ was made</span></div>
+    <div class="ticker-track" id="ticker-track"><!-- TICKER_ITEMS --></div>
   </div>
 </div>
 
 <div class="hero">
   <div class="hero-main">
     <div class="hero-bg-gfx"></div>
-    <div class="hero-overlay">
-      <span class="hero-tag">Lighting</span>
-      <h1 class="hero-title">FMX is around the corner</h1>
-      <p class="hero-excerpt">The 2026 FMX Conference begins on May 5th and we're highlighting a few of the many sessions we're interested in checking out.</p>
-      <div class="hero-meta">
-        <span>FXGuide</span>
-        <span class="hero-meta-dot"></span>
-        <span>April 24, 2026</span>
-        <span class="hero-meta-dot"></span>
-        <a class="hero-link" href="https://www.fxguide.com/quicktakes/fmx-is-around-the-corner/" target="_blank" rel="noopener">Read full story →</a>
-      </div></div>
+    <div class="hero-overlay"><!-- HERO_CONTENT --></div>
   </div>
-  <div class="hero-sidebar" id="hero-sidebar">
-    <div class="sidebar-story">
-      <div class="sidebar-tag">VFX</div>
-      <div class="sidebar-title">VFXShow 303: Hail Mary</div>
-      <div class="sidebar-meta">FXGuide · March 30, 2026 · <a class="sidebar-link" href="https://www.fxguide.com/thevfxshow/vfxshow-303-hail-mary/" target="_blank" rel="noopener">Read →</a></div>
-    </div>
-    <div class="sidebar-story">
-      <div class="sidebar-tag">Pipeline</div>
-      <div class="sidebar-title">Delivering Apple Immersive Video for streaming: a new practical workflow</div>
-      <div class="sidebar-meta">FXGuide · March 26, 2026 · <a class="sidebar-link" href="https://www.fxguide.com/quicktakes/delivering-apple-immersive-video-for-streaming-a-new-practical-workflow/" target="_blank" rel="noopener">Read →</a></div>
-    </div>
-    <div class="sidebar-story">
-      <div class="sidebar-tag">VFX</div>
-      <div class="sidebar-title">NVIDIA’s new real-time neural rendering with DLSS 5</div>
-      <div class="sidebar-meta">FXGuide · March 17, 2026 · <a class="sidebar-link" href="https://www.fxguide.com/quicktakes/nvidias-new-real-time-neural-rendering-with-dlss-5/" target="_blank" rel="noopener">Read →</a></div>
-    </div>
-    <div class="sidebar-story">
-      <div class="sidebar-tag">VFX</div>
-      <div class="sidebar-title">fxpodcast: going underground with Hijack</div>
-      <div class="sidebar-meta">FXGuide · March 17, 2026 · <a class="sidebar-link" href="https://www.fxguide.com/fxpodcasts/going-underground-hijack/" target="_blank" rel="noopener">Read →</a></div>
-    </div></div>
+  <div class="hero-sidebar" id="hero-sidebar"><!-- SIDEBAR_STORIES --></div>
 </div>
 
 <div class="categories">
@@ -224,157 +210,20 @@
   <div class="section-line"></div>
   <span class="section-tag" id="updated-tag"></span>
 </div>
-<div class="cards-grid" id="cards-grid">
-  <div class="card" data-tag="Awards">
-    <div class="card-source">FXGuide</div>
-    <div class="card-tag">Awards</div>
-    <div class="card-title">And the winner is …</div>
-    <div class="card-excerpt">Congrats to the winners at the 98th Oscars, a night celebrating the art and science of modern filmmaking.</div>
-    <div class="card-meta">
-      <span>March 16, 2026</span>
-      <a class="card-link" href="https://www.fxguide.com/quicktakes/and-the-winner-is-3/" target="_blank" rel="noopener">Read →</a>
-    </div>
-  </div>
-  <div class="card" data-tag="Software">
-    <div class="card-source">FXGuide</div>
-    <div class="card-tag">Software</div>
-    <div class="card-title">Immersive drama: more than VR — more than film</div>
-    <div class="card-excerpt">Closer to reality than virtual: The Dobos Connection explores how Apple Immersive Video and the Blackmagic URSA Cine Immersive are creating a new cinematic language beyond both film and VR.</div>
-    <div class="card-meta">
-      <span>March 11, 2026</span>
-      <a class="card-link" href="https://www.fxguide.com/fxfeatured/immersive-drama-more-than-vr-more-than-film/" target="_blank" rel="noopener">Read →</a>
-    </div>
-  </div>
-  <div class="card" data-tag="Lighting">
-    <div class="card-source">FXGuide</div>
-    <div class="card-tag">Lighting</div>
-    <div class="card-title">Fallout Season 2 with VFX Supervisor Jay Worth</div>
-    <div class="card-excerpt">VFX Supervisor Jay Worth discusses the intricate production of Fallout Season 2, highlighting a continued commitment to blending practical puppets with digital enhancements, cutting-edge VFX, and…</div>
-    <div class="card-meta">
-      <span>March 10, 2026</span>
-      <a class="card-link" href="https://www.fxguide.com/fxpodcasts/fallout-season-2-with-vxf-supservisor-jay-worth/" target="_blank" rel="noopener">Read →</a>
-    </div>
-  </div></div>
+<div class="cards-grid" id="cards-grid"><!-- CARDS --></div>
 
 <div class="section-header">
   <span class="section-title">More Today</span>
   <div class="section-line"></div>
 </div>
-<div class="wide-stories" id="wide-stories">
-  <div class="wide-story" data-tag="Compositing">
-    <div class="wide-story-tag">Compositing</div>
-    <div class="wide-story-title">Nuke 17 with Foundry Creative Director Juan Salazar</div>
-    <div class="wide-story-meta">
-      <span>FXGuide · March 01, 2026</span>
-      <a class="wide-story-link" href="https://www.fxguide.com/fxpodcasts/nuke-17-with-foundry-creative-director-juan-salazar/" target="_blank" rel="noopener">Read →</a>
-    </div>
-  </div>
-  <div class="wide-story" data-tag="VFX">
-    <div class="wide-story-tag">VFX</div>
-    <div class="wide-story-title">Judged by AI: 90 minutes to prove innocence: the VFX of Mercy</div>
-    <div class="wide-story-meta">
-      <span>FXGuide · February 21, 2026</span>
-      <a class="wide-story-link" href="https://www.fxguide.com/fxfeatured/judged-by-ai-90-minutes-to-prove-innocence-the-vfx-of-mercy/" target="_blank" rel="noopener">Read →</a>
-    </div>
-  </div>
-  <div class="wide-story" data-tag="VFX">
-    <div class="wide-story-tag">VFX</div>
-    <div class="wide-story-title">On The Set Pic: ‘Apex’</div>
-    <div class="wide-story-meta">
-      <span>befores & afters · April 27, 2026</span>
-      <a class="wide-story-link" href="https://beforesandafters.com/2026/04/27/on-the-set-pic-apex/" target="_blank" rel="noopener">Read →</a>
-    </div>
-  </div>
-  <div class="wide-story" data-tag="VFX">
-    <div class="wide-story-tag">VFX</div>
-    <div class="wide-story-title">Enter the Guardian</div>
-    <div class="wide-story-meta">
-      <span>befores & afters · April 26, 2026</span>
-      <a class="wide-story-link" href="https://beforesandafters.com/2026/04/27/enter-the-guardian/" target="_blank" rel="noopener">Read →</a>
-    </div>
-  </div>
-  <div class="wide-story" data-tag="VFX">
-    <div class="wide-story-tag">VFX</div>
-    <div class="wide-story-title">On The Set Pic: ‘Masters of the Universe’</div>
-    <div class="wide-story-meta">
-      <span>befores & afters · April 24, 2026</span>
-      <a class="wide-story-link" href="https://beforesandafters.com/2026/04/25/on-the-set-pic-masters-of-the-universe/" target="_blank" rel="noopener">Read →</a>
-    </div>
-  </div>
-  <div class="wide-story" data-tag="Breakdown">
-    <div class="wide-story-tag">Breakdown</div>
-    <div class="wide-story-title">How ‘War Machine’ was made</div>
-    <div class="wide-story-meta">
-      <span>befores & afters · April 22, 2026</span>
-      <a class="wide-story-link" href="https://beforesandafters.com/2026/04/22/how-war-machine-was-made/" target="_blank" rel="noopener">Read →</a>
-    </div>
-  </div>
-  <div class="wide-story" data-tag="VFX">
-    <div class="wide-story-tag">VFX</div>
-    <div class="wide-story-title">The magazines coming soon from befores & afters (there are so many!)</div>
-    <div class="wide-story-meta">
-      <span>befores & afters · April 21, 2026</span>
-      <a class="wide-story-link" href="https://beforesandafters.com/2026/04/21/the-magazines-coming-soon-from-befores-afters-there-are-so-many/" target="_blank" rel="noopener">Read →</a>
-    </div>
-  </div>
-  <div class="wide-story" data-tag="VFX">
-    <div class="wide-story-tag">VFX</div>
-    <div class="wide-story-title">Proof showcases its previs and postvis for ‘Stranger Things’ 5</div>
-    <div class="wide-story-meta">
-      <span>befores & afters · April 21, 2026</span>
-      <a class="wide-story-link" href="https://beforesandafters.com/2026/04/21/proof-showcases-its-previs-and-postvis-for-stranger-things-5/" target="_blank" rel="noopener">Read →</a>
-    </div>
-  </div>
-  <div class="wide-story" data-tag="VFX">
-    <div class="wide-story-tag">VFX</div>
-    <div class="wide-story-title">On The Set Pic: ‘The Miniature Wife’</div>
-    <div class="wide-story-meta">
-      <span>befores & afters · April 20, 2026</span>
-      <a class="wide-story-link" href="https://beforesandafters.com/2026/04/21/on-the-set-pic-the-miniature-wife/" target="_blank" rel="noopener">Read →</a>
-    </div>
-  </div>
-  <div class="wide-story" data-tag="VFX">
-    <div class="wide-story-tag">VFX</div>
-    <div class="wide-story-title">Watch The Third Floor’s previs and postvis reel for ‘Andor’ season 2</div>
-    <div class="wide-story-meta">
-      <span>befores & afters · April 19, 2026</span>
-      <a class="wide-story-link" href="https://beforesandafters.com/2026/04/20/watch-the-third-floors-previs-and-postvis-reel-for-andor-season-2/" target="_blank" rel="noopener">Read →</a>
-    </div>
-  </div></div>
+<div class="wide-stories" id="wide-stories"><!-- WIDE_STORIES --></div>
 
 <div class="section-header">
   <span class="section-title">VFX Breakdowns</span>
   <div class="section-line"></div>
   <span class="section-tag">Lighting · Compositing · FX</span>
 </div>
-<div class="breakdown-grid" id="breakdown-grid">
-  <div class="breakdown-card">
-    <div class="breakdown-type">Lighting · Pipeline</div>
-    <div class="breakdown-title">How ILM Built the Lighting Pipeline for a Recent Blockbuster</div>
-    <div class="breakdown-pills"><span class="breakdown-pill">Katana</span><span class="breakdown-pill">Arnold</span><span class="breakdown-pill">Python</span><span class="breakdown-pill">USD</span></div>
-    <div class="breakdown-meta">
-      <span>FXGuide · This week</span>
-      <a class="breakdown-link" href="https://www.fxguide.com" target="_blank" rel="noopener">Read breakdown →</a>
-    </div>
-  </div>
-  <div class="breakdown-card">
-    <div class="breakdown-type">Compositing</div>
-    <div class="breakdown-title">Deep Nuke Comp: Integrating CG Crowds into Practical Plates</div>
-    <div class="breakdown-pills"><span class="breakdown-pill">Nuke</span><span class="breakdown-pill">Ocula</span><span class="breakdown-pill">Keyer</span><span class="breakdown-pill">Roto</span></div>
-    <div class="breakdown-meta">
-      <span>befores & afters · This week</span>
-      <a class="breakdown-link" href="https://beforesandafters.com" target="_blank" rel="noopener">Read breakdown →</a>
-    </div>
-  </div>
-  <div class="breakdown-card">
-    <div class="breakdown-type">FX · Pipeline</div>
-    <div class="breakdown-title">Houdini Pyro Sim Workflow: From Destruction to Final Render</div>
-    <div class="breakdown-pills"><span class="breakdown-pill">Houdini</span><span class="breakdown-pill">Karma</span><span class="breakdown-pill">Redshift</span><span class="breakdown-pill">OpenVDB</span></div>
-    <div class="breakdown-meta">
-      <span>CG Channel · This week</span>
-      <a class="breakdown-link" href="https://www.cgchannel.com" target="_blank" rel="noopener">Read breakdown →</a>
-    </div>
-  </div></div>
+<div class="breakdown-grid" id="breakdown-grid"><!-- BREAKDOWN_CARDS --></div>
 
 <div class="artwork-section">
   <div class="section-header">
@@ -382,72 +231,8 @@
     <div class="section-line"></div>
     <span class="section-tag">ArtStation · CGSociety · Behance</span>
   </div>
-  <p class="artwork-intro">Hand-picked CG lighting, compositing &amp; VFX renders from the community — updated weekly.</p>
-  <div class="artwork-grid" id="artwork-grid">
-  <a class="artwork-card" href="https://cgsociety.org" target="_blank" rel="noopener" style="text-decoration:none;">
-    <div class="artwork-bg" style="background:linear-gradient(135deg, #0a2818 0%, #1a5c3a 50%, #0d401a 100%);font-size:56px;">✨</div>
-    <div class="artwork-overlay  artwork-always-show">
-      <div class="artwork-artist">Viktor Ingvarsson</div>
-      <div class="artwork-title-art">Volumetric Lighting Pass</div>
-      <span class="artwork-platform">CGSociety</span>
-    </div>
-  </a>
-  <a class="artwork-card" href="https://www.artstation.com/trending" target="_blank" rel="noopener" style="text-decoration:none;">
-    <div class="artwork-bg" style="background:linear-gradient(135deg, #281a0a 0%, #5c3a1a 50%, #40200d 100%);font-size:56px;">🔥</div>
-    <div class="artwork-overlay  artwork-always-show">
-      <div class="artwork-artist">Sergey Musin</div>
-      <div class="artwork-title-art">Fluid & Fire Simulation</div>
-      <span class="artwork-platform">ArtStation</span>
-    </div>
-  </a>
-  <a class="artwork-card" href="https://www.artstation.com/yoannlaulan" target="_blank" rel="noopener" style="text-decoration:none;">
-    <div class="artwork-bg" style="background:linear-gradient(135deg, #28280a 0%, #5c5a1a 50%, #40400d 100%);font-size:56px;">🧍</div>
-    <div class="artwork-overlay  artwork-always-show">
-      <div class="artwork-artist">Yoann Laulan</div>
-      <div class="artwork-title-art">Character Lookdev Pass</div>
-      <span class="artwork-platform">ArtStation</span>
-    </div>
-  </a>
-  <a class="artwork-card" href="https://www.artstation.com/trending" target="_blank" rel="noopener" style="text-decoration:none;">
-    <div class="artwork-bg" style="background:linear-gradient(135deg, #280a0a 0%, #5c1a1a 50%, #400d0d 100%);font-size:56px;">💥</div>
-    <div class="artwork-overlay  artwork-always-show">
-      <div class="artwork-artist">Yoan Miot</div>
-      <div class="artwork-title-art">City Destruction — Houdini FX</div>
-      <span class="artwork-platform">ArtStation</span>
-    </div>
-  </a>
-  <a class="artwork-card" href="https://www.behance.net" target="_blank" rel="noopener" style="text-decoration:none;">
-    <div class="artwork-bg" style="background:linear-gradient(135deg, #0a1828 0%, #1a3d5c 50%, #0d2840 100%);font-size:56px;">🚀</div>
-    <div class="artwork-overlay">
-      <div class="artwork-artist">Thibault Arlot</div>
-      <div class="artwork-title-art">Deep Composite — Sci-Fi Sequence</div>
-      <span class="artwork-platform">Behance</span>
-    </div>
-  </a>
-  <a class="artwork-card" href="https://cgsociety.org" target="_blank" rel="noopener" style="text-decoration:none;">
-    <div class="artwork-bg" style="background:linear-gradient(135deg, #1a280a 0%, #3d5c1a 50%, #28400d 100%);font-size:56px;">🏔️</div>
-    <div class="artwork-overlay">
-      <div class="artwork-artist">Nadia Ivanova</div>
-      <div class="artwork-title-art">Matte Painting — Aerial Shot</div>
-      <span class="artwork-platform">CGSociety</span>
-    </div>
-  </a>
-  <a class="artwork-card" href="https://www.artstation.com/maciejkuciara" target="_blank" rel="noopener" style="text-decoration:none;">
-    <div class="artwork-bg" style="background:linear-gradient(135deg, #0a1628 0%, #1a3a5c 50%, #0d2040 100%);font-size:56px;">🌆</div>
-    <div class="artwork-overlay">
-      <div class="artwork-artist">Maciej Kuciara</div>
-      <div class="artwork-title-art">Environment Lighting Study</div>
-      <span class="artwork-platform">ArtStation</span>
-    </div>
-  </a>
-  <a class="artwork-card" href="https://www.artstation.com/ashthorp" target="_blank" rel="noopener" style="text-decoration:none;">
-    <div class="artwork-bg" style="background:linear-gradient(135deg, #1a0a28 0%, #3c1a5c 50%, #1a0d40 100%);font-size:56px;">🎬</div>
-    <div class="artwork-overlay">
-      <div class="artwork-artist">Ash Thorp</div>
-      <div class="artwork-title-art">Cinematic Comp — Final Polish</div>
-      <span class="artwork-platform">ArtStation</span>
-    </div>
-  </a></div>
+  <p class="artwork-intro">Trending CG lighting, compositing &amp; VFX renders from ArtStation — updated daily.</p>
+  <div class="artwork-grid" id="artwork-grid"><!-- ARTWORK_CARDS --></div>
 </div>
 
 <footer>
@@ -492,35 +277,34 @@
 
 <script>
   const today = new Date();
-  const opts = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-  const dateStr = today.toLocaleDateString('en-US', opts);
-  document.getElementById('nav-date').textContent = dateStr;
+  const opts = { weekday:'long', year:'numeric', month:'long', day:'numeric' };
+  document.getElementById('nav-date').textContent = today.toLocaleDateString('en-US', opts);
   document.getElementById('footer-date').textContent = '© ' + today.getFullYear();
-  document.getElementById('updated-tag').textContent = 'Updated ' + dateStr;
+  document.getElementById('updated-tag').textContent = 'Updated ' + today.toLocaleDateString('en-US', opts);
 
   const tagColours = { 'VFX':'#e4b84a','Pipeline':'#3ecf8e','Labour':'#f06060','Software':'#7b5cf0','Lighting':'#4f8ef7','Compositing':'#4f8ef7','Breakdown':'#e4b84a','Awards':'#3ecf8e','Industry':'#9299b0' };
-  document.querySelectorAll('.card-tag, .wide-story-tag, .sidebar-tag, .breakdown-type').forEach(el => {
-    const t = el.textContent.trim();
-    if (tagColours[t]) el.style.color = tagColours[t];
+  document.querySelectorAll('.card-tag,.wide-story-tag,.sidebar-tag,.breakdown-type').forEach(el => {
+    const c = tagColours[el.textContent.trim()];
+    if (c) el.style.color = c;
   });
 
   function filterStories(category) {
     const all = category === 'All';
-    [['#cards-grid', '.card'], ['#wide-stories', '.wide-story']].forEach(([gridSel, itemSel]) => {
-      const grid = document.querySelector(gridSel);
-      const items = grid.querySelectorAll(itemSel);
-      let visible = 0;
+    [['#cards-grid','.card'],['#wide-stories','.wide-story']].forEach(([g,s]) => {
+      const grid = document.querySelector(g);
+      const items = grid.querySelectorAll(s);
+      let vis = 0;
       items.forEach(item => {
-        const show = all || (item.getAttribute('data-tag') || '') === category;
+        const show = all || (item.getAttribute('data-tag')||'') === category;
         item.style.display = show ? '' : 'none';
-        if (show) visible++;
+        if (show) vis++;
       });
-      const visArr = [...items].filter(i => i.style.display !== 'none');
-      visArr.forEach((item, i) => { item.style.borderRight = i === visArr.length - 1 ? 'none' : '1px solid var(--border)'; });
+      const arr = [...items].filter(i => i.style.display !== 'none');
+      arr.forEach((item,i) => { item.style.borderRight = i===arr.length-1?'none':'1px solid var(--border)'; });
       let empty = grid.querySelector('.no-news');
       if (!empty) { empty = document.createElement('div'); empty.className = 'no-news'; grid.appendChild(empty); }
-      empty.textContent = visible === 0 ? `No ${category} stories today — check back tomorrow.` : '';
-      empty.style.display = visible === 0 ? '' : 'none';
+      empty.textContent = vis===0 ? `No ${category} stories today — check back tomorrow.` : '';
+      empty.style.display = vis===0 ? '' : 'none';
     });
     document.getElementById('section-main-title').textContent = all ? 'Industry News' : category + ' News';
   }
