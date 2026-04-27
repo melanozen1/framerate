@@ -1,0 +1,35 @@
+name: Update Animation News
+
+on:
+  schedule:
+    # Runs every day at 8:00 AM UTC (adjust to your timezone if you like)
+    - cron: '0 8 * * *'
+  workflow_dispatch:
+    # Lets you manually trigger a refresh from the GitHub Actions tab anytime
+
+jobs:
+  update-news:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Fetch latest animation news
+        run: python fetch_news.py
+
+      - name: Commit and push updated site
+        run: |
+          git config user.name "FrameRate Bot"
+          git config user.email "actions@github.com"
+          git add index.html
+          git diff --staged --quiet || git commit -m "Daily news update $(date -u +'%Y-%m-%d %H:%M UTC')"
+          git push
