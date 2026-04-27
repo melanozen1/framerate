@@ -3,107 +3,145 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FrameRate — Animation News</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<title>LUMINA — VFX & CG Industry</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
-    --ink: #1a1208;
-    --cream: #f5f0e8;
-    --cream2: #ece6d8;
-    --orange: #e8521a;
-    --orange-dark: #b33e10;
-    --muted: #6b6255;
-    --border: rgba(26,18,8,0.15);
-    --border-strong: rgba(26,18,8,0.3);
+    --bg: #0d0f14;
+    --bg2: #13161e;
+    --bg3: #1a1e2a;
+    --surface: #1e2230;
+    --surface2: #252a3a;
+    --accent: #4f8ef7;
+    --accent2: #7b5cf0;
+    --gold: #e4b84a;
+    --green: #3ecf8e;
+    --red: #f06060;
+    --text: #e8eaf0;
+    --text2: #9299b0;
+    --text3: #5a6080;
+    --border: rgba(255,255,255,0.07);
+    --border2: rgba(255,255,255,0.12);
   }
-  body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--ink); min-height: 100vh; overflow-x: hidden; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; overflow-x: hidden; }
 
-  nav { background: var(--ink); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 56px; position: sticky; top: 0; z-index: 100; }
-  .logo { font-family: 'Bebas Neue', sans-serif; font-size: 26px; color: var(--cream); letter-spacing: 2px; display: flex; align-items: center; gap: 8px; }
-  .logo-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--orange); display: inline-block; }
-  .nav-links { display: flex; gap: 28px; list-style: none; }
-  .nav-links a { color: rgba(245,240,232,0.65); text-decoration: none; font-size: 13px; font-weight: 500; letter-spacing: 0.5px; text-transform: uppercase; }
-  .nav-date { color: rgba(245,240,232,0.45); font-size: 12px; }
+  nav { background: rgba(13,15,20,0.97); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 54px; position: sticky; top: 0; z-index: 100; }
+  .logo { font-family: 'Bebas Neue', sans-serif; font-size: 24px; letter-spacing: 4px; background: linear-gradient(90deg, #4f8ef7, #7b5cf0); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .nav-links { display: flex; gap: 24px; list-style: none; }
+  .nav-links a { color: var(--text2); text-decoration: none; font-size: 12px; font-weight: 500; letter-spacing: 0.8px; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--text); }
+  .nav-date { color: var(--text3); font-size: 12px; }
 
-  .ticker-wrap { background: var(--orange); overflow: hidden; height: 32px; display: flex; align-items: center; }
-  .ticker-label { background: var(--orange-dark); color: var(--cream); font-size: 11px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; padding: 0 14px; white-space: nowrap; height: 100%; display: flex; align-items: center; flex-shrink: 0; }
-  .ticker-track { display: flex; animation: ticker 40s linear infinite; white-space: nowrap; }
-  .ticker-track span { font-size: 12px; color: var(--cream); padding: 0 32px; }
-  .ticker-track span::before { content: '◆ '; opacity: 0.6; }
+  .ticker-wrap { background: var(--bg2); border-bottom: 1px solid var(--border); overflow: hidden; height: 30px; display: flex; align-items: center; }
+  .ticker-label { background: var(--accent); color: #fff; font-size: 10px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; padding: 0 12px; white-space: nowrap; height: 100%; display: flex; align-items: center; flex-shrink: 0; }
+  .ticker-track { display: flex; animation: ticker 50s linear infinite; white-space: nowrap; }
+  .ticker-track span { font-size: 12px; color: var(--text2); padding: 0 28px; }
+  .ticker-track span::before { content: '// '; color: var(--accent); font-weight: 600; }
   @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
-  .hero { display: grid; grid-template-columns: 1fr 380px; border-bottom: 1px solid var(--border-strong); }
-  .hero-main { border-right: 1px solid var(--border-strong); position: relative; overflow: hidden; min-height: 460px; cursor: pointer; background: #2a1f0e; }
-  .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(26,18,8,0.95) 0%, rgba(26,18,8,0.3) 60%, transparent 100%); display: flex; flex-direction: column; justify-content: flex-end; padding: 2rem; }
-  .hero-icon { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -60%); opacity: 0.08; }
-  .hero-tag { display: inline-block; background: var(--orange); color: var(--cream); font-size: 10px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; padding: 4px 10px; border-radius: 3px; margin-bottom: 14px; width: fit-content; }
-  .hero-title { font-family: 'DM Serif Display', serif; font-size: 34px; line-height: 1.2; color: var(--cream); margin-bottom: 12px; }
-  .hero-excerpt { font-size: 14px; line-height: 1.6; color: rgba(245,240,232,0.7); margin-bottom: 14px; }
-  .hero-meta { font-size: 13px; color: rgba(245,240,232,0.55); display: flex; gap: 14px; align-items: center; }
-  .hero-meta-dot { width: 3px; height: 3px; border-radius: 50%; background: rgba(245,240,232,0.35); }
-  .hero-link { color: var(--orange); text-decoration: none; font-size: 13px; font-weight: 500; }
+  .hero { display: grid; grid-template-columns: 1fr 360px; border-bottom: 1px solid var(--border); }
+  .hero-main { border-right: 1px solid var(--border); position: relative; overflow: hidden; min-height: 440px; cursor: pointer; background: var(--bg2); }
+  .hero-bg-gfx { position: absolute; inset: 0; background: radial-gradient(ellipse at 30% 60%, rgba(79,142,247,0.12) 0%, transparent 60%), radial-gradient(ellipse at 80% 20%, rgba(123,92,240,0.1) 0%, transparent 50%); }
+  .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(13,15,20,0.98) 0%, rgba(13,15,20,0.5) 55%, transparent 100%); display: flex; flex-direction: column; justify-content: flex-end; padding: 2rem; }
+  .hero-tag { display: inline-flex; align-items: center; gap: 6px; background: rgba(79,142,247,0.15); border: 1px solid rgba(79,142,247,0.3); color: var(--accent); font-size: 10px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; padding: 4px 10px; border-radius: 4px; margin-bottom: 14px; width: fit-content; }
+  .hero-tag::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); animation: blink 2s infinite; }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+  .hero-title { font-family: 'DM Serif Display', serif; font-size: 32px; line-height: 1.2; color: var(--text); margin-bottom: 12px; }
+  .hero-excerpt { font-size: 14px; line-height: 1.65; color: var(--text2); margin-bottom: 16px; max-width: 600px; }
+  .hero-meta { font-size: 12px; color: var(--text3); display: flex; gap: 14px; align-items: center; }
+  .hero-meta-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--text3); }
+  .hero-link { color: var(--accent); text-decoration: none; font-size: 12px; font-weight: 600; }
   .hero-link:hover { text-decoration: underline; }
 
-  .hero-sidebar { display: flex; flex-direction: column; }
-  .sidebar-story { padding: 1.1rem 1.4rem; border-bottom: 1px solid var(--border); cursor: pointer; transition: background 0.15s; flex: 1; }
-  .sidebar-story:hover { background: var(--cream2); }
+  .hero-sidebar { display: flex; flex-direction: column; background: var(--bg2); }
+  .sidebar-story { padding: 1rem 1.25rem; border-bottom: 1px solid var(--border); cursor: pointer; transition: background 0.15s; flex: 1; }
+  .sidebar-story:hover { background: var(--bg3); }
   .sidebar-story:last-child { border-bottom: none; }
-  .sidebar-tag { font-size: 10px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; color: var(--orange); margin-bottom: 5px; }
-  .sidebar-title { font-family: 'DM Serif Display', serif; font-size: 17px; line-height: 1.3; color: var(--ink); margin-bottom: 6px; }
-  .sidebar-meta { font-size: 12px; color: var(--muted); }
-  .sidebar-link { color: var(--orange); text-decoration: none; font-size: 12px; }
+  .sidebar-tag { font-size: 10px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent); margin-bottom: 5px; }
+  .sidebar-title { font-family: 'DM Serif Display', serif; font-size: 15px; line-height: 1.35; color: var(--text); margin-bottom: 6px; }
+  .sidebar-meta { font-size: 11px; color: var(--text3); }
+  .sidebar-link { color: var(--accent); text-decoration: none; font-size: 11px; }
 
-  .categories { display: flex; border-bottom: 1px solid var(--border-strong); overflow-x: auto; }
-  .cat-pill { padding: 0.75rem 1.4rem; font-size: 12px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); cursor: pointer; border-right: 1px solid var(--border); white-space: nowrap; transition: all 0.15s; }
-  .cat-pill:hover { background: var(--cream2); color: var(--ink); }
-  .cat-pill.active { background: var(--ink); color: var(--cream); }
+  .categories { display: flex; border-bottom: 1px solid var(--border); background: var(--bg2); overflow-x: auto; }
+  .cat-pill { padding: 0.7rem 1.25rem; font-size: 11px; font-weight: 600; letter-spacing: 1.2px; text-transform: uppercase; color: var(--text3); cursor: pointer; border-right: 1px solid var(--border); white-space: nowrap; transition: all 0.15s; }
+  .cat-pill:hover { background: var(--bg3); color: var(--text2); }
+  .cat-pill.active { background: var(--accent); color: #fff; }
 
-  .section-header { display: flex; align-items: center; gap: 12px; padding: 1.4rem 2rem 1rem; border-bottom: 1px solid var(--border); }
-  .section-title { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 2px; color: var(--ink); }
-  .section-line { flex: 1; height: 1px; background: var(--border-strong); }
-  .updated-tag { font-size: 11px; color: var(--muted); font-style: italic; }
+  .section-header { display: flex; align-items: center; gap: 12px; padding: 1.25rem 2rem 0.75rem; border-bottom: 1px solid var(--border); }
+  .section-title { font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 3px; color: var(--text); }
+  .section-line { flex: 1; height: 1px; background: var(--border2); }
+  .section-tag { font-size: 10px; color: var(--text3); font-style: italic; }
 
-  .cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); border-bottom: 1px solid var(--border-strong); }
-  .card { padding: 1.5rem 2rem; border-right: 1px solid var(--border); cursor: pointer; transition: background 0.15s; }
+  .cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); border-bottom: 1px solid var(--border); }
+  .card { padding: 1.5rem; border-right: 1px solid var(--border); cursor: pointer; transition: background 0.15s; }
   .card:last-child { border-right: none; }
-  .card:hover { background: var(--cream2); }
-  .card-source-badge { display: inline-block; background: var(--cream2); border: 1px solid var(--border); border-radius: 3px; font-size: 10px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); padding: 3px 8px; margin-bottom: 10px; }
-  .card-tag { font-size: 10px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; color: var(--orange); margin-bottom: 8px; }
-  .card-title { font-family: 'DM Serif Display', serif; font-size: 19px; line-height: 1.35; color: var(--ink); margin-bottom: 10px; }
-  .card-excerpt { font-size: 13px; line-height: 1.65; color: var(--muted); margin-bottom: 12px; }
-  .card-meta { font-size: 12px; color: var(--muted); border-top: 1px solid var(--border); padding-top: 10px; display: flex; justify-content: space-between; align-items: center; }
-  .card-link { color: var(--orange); text-decoration: none; font-size: 12px; font-weight: 500; }
+  .card:hover { background: var(--bg2); }
+  .card-source { display: inline-block; background: var(--surface); border-radius: 3px; font-size: 10px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--text3); padding: 3px 8px; margin-bottom: 10px; }
+  .card-tag { font-size: 10px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+  .card-title { font-family: 'DM Serif Display', serif; font-size: 18px; line-height: 1.35; color: var(--text); margin-bottom: 10px; }
+  .card-excerpt { font-size: 13px; line-height: 1.65; color: var(--text2); margin-bottom: 12px; }
+  .card-meta { font-size: 11px; color: var(--text3); border-top: 1px solid var(--border); padding-top: 10px; display: flex; justify-content: space-between; align-items: center; }
+  .card-link { color: var(--accent); text-decoration: none; font-size: 11px; font-weight: 600; }
   .card-link:hover { text-decoration: underline; }
 
-  .wide-stories { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1px solid var(--border-strong); }
-  .wide-story { display: flex; flex-direction: column; gap: 6px; padding: 1.25rem 2rem; border-right: 1px solid var(--border); cursor: pointer; transition: background 0.15s; }
-  .wide-story:hover { background: var(--cream2); }
+  .wide-stories { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1px solid var(--border); }
+  .wide-story { display: flex; flex-direction: column; gap: 5px; padding: 1.1rem 1.5rem; border-right: 1px solid var(--border); cursor: pointer; transition: background 0.15s; }
+  .wide-story:hover { background: var(--bg2); }
   .wide-story:last-child { border-right: none; }
-  .wide-story-tag { font-size: 10px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; color: var(--orange); }
-  .wide-story-title { font-family: 'DM Serif Display', serif; font-size: 16px; line-height: 1.35; color: var(--ink); }
-  .wide-story-meta { font-size: 12px; color: var(--muted); display: flex; justify-content: space-between; }
-  .wide-story-link { color: var(--orange); text-decoration: none; font-size: 12px; font-weight: 500; }
+  .wide-story-tag { font-size: 10px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent); }
+  .wide-story-title { font-family: 'DM Serif Display', serif; font-size: 15px; line-height: 1.35; color: var(--text); }
+  .wide-story-meta { font-size: 11px; color: var(--text3); display: flex; justify-content: space-between; align-items: center; margin-top: 2px; }
+  .wide-story-link { color: var(--accent); text-decoration: none; font-size: 11px; font-weight: 600; }
 
-  .no-news { padding: 3rem 2rem; text-align: center; color: var(--muted); font-style: italic; }
+  /* BREAKDOWNS */
+  .breakdown-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; border-bottom: 1px solid var(--border); }
+  .breakdown-card { padding: 1.5rem; border-right: 1px solid var(--border); cursor: pointer; transition: background 0.15s; }
+  .breakdown-card:last-child { border-right: none; }
+  .breakdown-card:hover { background: var(--bg2); }
+  .breakdown-type { font-size: 10px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+  .breakdown-title { font-family: 'DM Serif Display', serif; font-size: 17px; line-height: 1.35; color: var(--text); margin-bottom: 10px; }
+  .breakdown-pills { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
+  .breakdown-pill { font-size: 10px; font-weight: 500; background: var(--surface); color: var(--text3); padding: 3px 8px; border-radius: 12px; }
+  .breakdown-meta { font-size: 11px; color: var(--text3); display: flex; justify-content: space-between; border-top: 1px solid var(--border); padding-top: 10px; }
+  .breakdown-link { color: var(--gold); text-decoration: none; font-size: 11px; font-weight: 600; }
+  .breakdown-link:hover { text-decoration: underline; }
 
-  footer { background: var(--ink); padding: 3rem 2rem; color: rgba(245,240,232,0.6); display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 2rem; }
-  .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 28px; color: var(--cream); letter-spacing: 2px; margin-bottom: 0.5rem; }
-  .footer-tagline { font-size: 13px; line-height: 1.6; }
-  .footer-col-title { font-size: 11px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color: var(--cream); margin-bottom: 1rem; }
-  .footer-links { list-style: none; display: flex; flex-direction: column; gap: 8px; }
-  .footer-links a { font-size: 13px; color: rgba(245,240,232,0.55); text-decoration: none; }
-  .footer-bottom { background: rgba(0,0,0,0.25); padding: 1rem 2rem; display: flex; justify-content: space-between; font-size: 12px; color: rgba(245,240,232,0.35); }
+  /* ARTWORK */
+  .artwork-section { border-bottom: 1px solid var(--border); }
+  .artwork-intro { padding: 0 2rem 1rem; font-size: 13px; color: var(--text3); }
+  .artwork-grid { display: grid; grid-template-columns: repeat(4, 1fr); }
+  .artwork-card { position: relative; aspect-ratio: 4/3; overflow: hidden; cursor: pointer; border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); background: var(--bg2); }
+  .artwork-card:nth-child(4n) { border-right: none; }
+  .artwork-card:hover .artwork-overlay { opacity: 1; }
+  .artwork-bg { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; transition: transform 0.4s ease; }
+  .artwork-card:hover .artwork-bg { transform: scale(1.05); }
+  .artwork-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(13,15,20,0.97) 0%, rgba(13,15,20,0.5) 55%, transparent 100%); display: flex; flex-direction: column; justify-content: flex-end; padding: 1rem; opacity: 0; transition: opacity 0.3s ease; }
+  .artwork-always-show { opacity: 1 !important; }
+  .artwork-artist { font-size: 13px; font-weight: 600; color: var(--text); }
+  .artwork-title-art { font-size: 12px; color: var(--text2); margin-bottom: 6px; }
+  .artwork-platform { display: inline-block; font-size: 10px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--gold); border: 1px solid rgba(228,184,74,0.3); background: rgba(228,184,74,0.08); padding: 2px 7px; border-radius: 3px; }
+
+  .no-news { padding: 2.5rem 2rem; text-align: center; color: var(--text3); font-style: italic; grid-column: 1 / -1; }
+
+  footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 2.5rem 2rem; color: var(--text3); display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 2rem; }
+  .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 26px; letter-spacing: 4px; background: linear-gradient(90deg, #4f8ef7, #7b5cf0); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 0.5rem; }
+  .footer-tagline { font-size: 12px; line-height: 1.7; }
+  .footer-col-title { font-size: 10px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--text2); margin-bottom: 0.85rem; }
+  .footer-links { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+  .footer-links a { font-size: 12px; color: var(--text3); text-decoration: none; transition: color 0.15s; }
+  .footer-links a:hover { color: var(--text); }
+  .footer-bottom { background: var(--bg); border-top: 1px solid var(--border); padding: 0.85rem 2rem; display: flex; justify-content: space-between; font-size: 11px; color: var(--text3); }
 
   @media (max-width: 900px) {
     .hero { grid-template-columns: 1fr; }
-    .hero-main { min-height: 320px; }
     .hero-sidebar { display: none; }
-    .cards-grid { grid-template-columns: 1fr; }
-    .card { border-right: none; border-bottom: 1px solid var(--border); }
+    .cards-grid, .breakdown-grid { grid-template-columns: 1fr; }
+    .card, .breakdown-card { border-right: none; border-bottom: 1px solid var(--border); }
     .wide-stories { grid-template-columns: 1fr; }
     .wide-story { border-right: none; border-bottom: 1px solid var(--border); }
-    footer { grid-template-columns: 1fr; }
+    .artwork-grid { grid-template-columns: repeat(2, 1fr); }
+    footer { grid-template-columns: 1fr 1fr; }
     .nav-links { display: none; }
   }
 </style>
@@ -111,243 +149,117 @@
 <body>
 
 <nav>
-  <div class="logo"><span class="logo-dot"></span>FRAMERATE</div>
+  <div class="logo">LUMINA</div>
   <ul class="nav-links">
-    <li><a href="#">Film</a></li>
-    <li><a href="#">TV & Streaming</a></li>
-    <li><a href="#">Anime</a></li>
-    <li><a href="#">Industry</a></li>
-    <li><a href="#">Festivals</a></li>
+    <li><a href="#">VFX</a></li>
+    <li><a href="#">Pipeline</a></li>
+    <li><a href="#">Software</a></li>
+    <li><a href="#">Labour</a></li>
+    <li><a href="#">Breakdowns</a></li>
+    <li><a href="#">Artwork</a></li>
   </ul>
   <span class="nav-date" id="nav-date"></span>
 </nav>
 
 <div class="ticker-wrap">
-  <div class="ticker-label">Latest</div>
+  <div class="ticker-label">Live</div>
   <div style="overflow:hidden;flex:1;display:flex;align-items:center;">
-    <div class="ticker-track" id="ticker-track">
-      <span>Annecy Rekindles Illumination Relationship, Making ‘Minions & Monsters’ Its Opening Film</span><span>Vivienne Medrano’s ‘Hazbin Hotel’ Renewed For Final Season, Securing A Rare Creator-Planned Ending</span><span>Alleged ‘Avatar’ Leaker Arrested, Faces A Potential Seven-Year Sentence</span><span>An Unhinged Support Group Anchors Áron Siegler’s Absurd RCA Short ‘Anti Wizards’</span><span>Cartoon Saloon And Dog Ears’ My Brother the Minotaur: The Color Script Behind The Story (EXCLUSIVE BTS)</span><span>Hand-Drawn Turtles Collide With Live-Action Magic In Eyebolls’ Hybrid Spot (EXCLUSIVE BTS)</span><span>ACLU Debuts ‘Know Your Rights University,’ A Charming Stop-Motion Civics Series For Kids</span><span>‘Simpsons Movie 2,’ ‘Phineas and Ferb’ Project Among First Animated Features To Land California Tax Credits</span><span>Anime Producer Kei Watabiki and Manga Editor Yuki Yokoi Talk 35 Years of ‘Baki’</span><span>Kaboom Animation Festival</span><span>Exclusive Clip: ‘Family Guy - Lower G.I. Joe’</span><span>FOX Shares Exclusive ‘American Dad!: ‘The Treasure of Old Chinatown’ Clip</span><span>Annecy Rekindles Illumination Relationship, Making ‘Minions & Monsters’ Its Opening Film</span><span>Vivienne Medrano’s ‘Hazbin Hotel’ Renewed For Final Season, Securing A Rare Creator-Planned Ending</span><span>Alleged ‘Avatar’ Leaker Arrested, Faces A Potential Seven-Year Sentence</span><span>An Unhinged Support Group Anchors Áron Siegler’s Absurd RCA Short ‘Anti Wizards’</span><span>Cartoon Saloon And Dog Ears’ My Brother the Minotaur: The Color Script Behind The Story (EXCLUSIVE BTS)</span><span>Hand-Drawn Turtles Collide With Live-Action Magic In Eyebolls’ Hybrid Spot (EXCLUSIVE BTS)</span><span>ACLU Debuts ‘Know Your Rights University,’ A Charming Stop-Motion Civics Series For Kids</span><span>‘Simpsons Movie 2,’ ‘Phineas and Ferb’ Project Among First Animated Features To Land California Tax Credits</span><span>Anime Producer Kei Watabiki and Manga Editor Yuki Yokoi Talk 35 Years of ‘Baki’</span><span>Kaboom Animation Festival</span><span>Exclusive Clip: ‘Family Guy - Lower G.I. Joe’</span><span>FOX Shares Exclusive ‘American Dad!: ‘The Treasure of Old Chinatown’ Clip</span>
-    </div>
+    <div class="ticker-track" id="ticker-track"><!-- TICKER_ITEMS --></div>
   </div>
 </div>
 
-<!-- HERO STORY -->
 <div class="hero">
   <div class="hero-main">
-    <svg class="hero-icon" width="260" height="260" viewBox="0 0 200 200" fill="none">
-      <rect x="10" y="40" width="180" height="120" rx="8" stroke="white" stroke-width="4"/>
-      <rect x="10" y="55" width="180" height="6" stroke="white" stroke-width="3"/>
-      <rect x="10" y="139" width="180" height="6" stroke="white" stroke-width="3"/>
-      <rect x="20" y="40" width="10" height="15" fill="white"/>
-      <rect x="40" y="40" width="10" height="15" fill="white"/>
-      <rect x="60" y="40" width="10" height="15" fill="white"/>
-      <rect x="130" y="40" width="10" height="15" fill="white"/>
-      <rect x="150" y="40" width="10" height="15" fill="white"/>
-      <rect x="170" y="40" width="10" height="15" fill="white"/>
-      <rect x="20" y="145" width="10" height="15" fill="white"/>
-      <rect x="40" y="145" width="10" height="15" fill="white"/>
-      <rect x="60" y="145" width="10" height="15" fill="white"/>
-      <rect x="130" y="145" width="10" height="15" fill="white"/>
-      <rect x="150" y="145" width="10" height="15" fill="white"/>
-      <rect x="170" y="145" width="10" height="15" fill="white"/>
-      <circle cx="100" cy="100" r="28" stroke="white" stroke-width="4"/>
-      <polygon points="92,88 116,100 92,112" fill="white"/>
-    </svg>
-    <div class="hero-overlay">
-      
-      <span class="hero-tag">Film</span>
-      <h1 class="hero-title">Annecy Rekindles Illumination Relationship, Making ‘Minions & Monsters’ Its Opening Film</h1>
-      <p class="hero-excerpt">Illumination returns to the French fest, reminding of its Paris studio roots and long-standing pipeline since the days of Mac Guff.</p>
-      <div class="hero-meta">
-        <span>Cartoon Brew</span>
-        <span class="hero-meta-dot"></span>
-        <span>April 27, 2026</span>
-        <span class="hero-meta-dot"></span>
-        <a class="hero-link" href="https://www.cartoonbrew.com/animators/minions-and-monsters-annecy-260363.html" target="_blank" rel="noopener">Read full story →</a>
-      </div>
-    
-    </div>
+    <div class="hero-bg-gfx"></div>
+    <div class="hero-overlay"><!-- HERO_CONTENT --></div>
   </div>
-  <div class="hero-sidebar" id="hero-sidebar">
-    
-    <div class="sidebar-story">
-      <div class="sidebar-tag">TV & Streaming</div>
-      <div class="sidebar-title">Vivienne Medrano’s ‘Hazbin Hotel’ Renewed For Final Season, Securing A Rare Creator-Planned Ending</div>
-      <div class="sidebar-meta">Cartoon Brew · April 27, 2026 · <a class="sidebar-link" href="https://www.cartoonbrew.com/series/hazbin-hotel-final-season-vivienne-medrano-260346.html" target="_blank" rel="noopener">Read →</a></div>
-    </div>
-    <div class="sidebar-story">
-      <div class="sidebar-tag">Film</div>
-      <div class="sidebar-title">Alleged ‘Avatar’ Leaker Arrested, Faces A Potential Seven-Year Sentence</div>
-      <div class="sidebar-meta">Cartoon Brew · April 24, 2026 · <a class="sidebar-link" href="https://www.cartoonbrew.com/law/avatar-leaker-arrested-singapore-260337.html" target="_blank" rel="noopener">Read →</a></div>
-    </div>
-    <div class="sidebar-story">
-      <div class="sidebar-tag">Film</div>
-      <div class="sidebar-title">An Unhinged Support Group Anchors Áron Siegler’s Absurd RCA Short ‘Anti Wizards’</div>
-      <div class="sidebar-meta">Cartoon Brew · April 24, 2026 · <a class="sidebar-link" href="https://www.cartoonbrew.com/shorts/anti-wizards-aron-siegler-rca-260328.html" target="_blank" rel="noopener">Read →</a></div>
-    </div>
-    <div class="sidebar-story">
-      <div class="sidebar-tag">TV & Streaming</div>
-      <div class="sidebar-title">Cartoon Saloon And Dog Ears’ My Brother the Minotaur: The Color Script Behind The Story (EXCLUSIVE BTS)</div>
-      <div class="sidebar-meta">Cartoon Brew · April 24, 2026 · <a class="sidebar-link" href="https://www.cartoonbrew.com/series/my-brother-the-minotaur-stefano-scapolan-cartoon-saloon-260304.html" target="_blank" rel="noopener">Read →</a></div>
-    </div>
-  </div>
+  <div class="hero-sidebar" id="hero-sidebar"><!-- SIDEBAR_STORIES --></div>
 </div>
 
-<!-- CATEGORIES -->
 <div class="categories">
-  <div class="cat-pill active">All</div>
-  <div class="cat-pill">Film</div>
-  <div class="cat-pill">TV & Streaming</div>
-  <div class="cat-pill">Anime</div>
-  <div class="cat-pill">Industry</div>
-  <div class="cat-pill">Technology</div>
-  <div class="cat-pill">Festivals</div>
-  <div class="cat-pill">Indie</div>
+  <div class="cat-pill active" data-filter="All">All</div>
+  <div class="cat-pill" data-filter="VFX">VFX</div>
+  <div class="cat-pill" data-filter="Pipeline">Pipeline</div>
+  <div class="cat-pill" data-filter="Software">Software</div>
+  <div class="cat-pill" data-filter="Lighting">Lighting</div>
+  <div class="cat-pill" data-filter="Compositing">Compositing</div>
+  <div class="cat-pill" data-filter="Labour">Labour</div>
+  <div class="cat-pill" data-filter="Breakdown">Breakdown</div>
+  <div class="cat-pill" data-filter="Industry">Industry</div>
+  <div class="cat-pill" data-filter="Awards">Awards</div>
 </div>
 
-<!-- LATEST STORIES -->
 <div class="section-header">
-  <span class="section-title">Latest Stories</span>
+  <span class="section-title" id="section-main-title">Industry News</span>
   <div class="section-line"></div>
-  <span class="updated-tag" id="updated-tag"></span>
+  <span class="section-tag" id="updated-tag"></span>
 </div>
-<div class="cards-grid" id="cards-grid">
-  
-  <div class="card" data-tag="Technology">
-    <div class="card-source-badge">Cartoon Brew</div>
-    <div class="card-tag">Technology</div>
-    <div class="card-title">Hand-Drawn Turtles Collide With Live-Action Magic In Eyebolls’ Hybrid Spot (EXCLUSIVE BTS)</div>
-    <div class="card-excerpt">A behind-the-scenes look at how Eyebolls integrated 2D characters into live-action footage using careful staging and a nuanced compositing pipeline.</div>
-    <div class="card-meta">
-      <span>April 24, 2026</span>
-      <a class="card-link" href="https://www.cartoonbrew.com/advertising/eyebolls-teenage-mutant-ninja-turtles-magic-the-gathering-260314.html" target="_blank" rel="noopener">Read full story →</a>
-    </div>
-  </div>
-  <div class="card" data-tag="TV & Streaming">
-    <div class="card-source-badge">Cartoon Brew</div>
-    <div class="card-tag">TV & Streaming</div>
-    <div class="card-title">ACLU Debuts ‘Know Your Rights University,’ A Charming Stop-Motion Civics Series For Kids</div>
-    <div class="card-excerpt">Four-episodes now on YouTube explore free speech, censorship, and government basics through colorful puppets and public-TV-style storytelling.</div>
-    <div class="card-meta">
-      <span>April 23, 2026</span>
-      <a class="card-link" href="https://www.cartoonbrew.com/series/aclu-know-your-rights-university-youtube-260295.html" target="_blank" rel="noopener">Read full story →</a>
-    </div>
-  </div>
-  <div class="card" data-tag="Film">
-    <div class="card-source-badge">Cartoon Brew</div>
-    <div class="card-tag">Film</div>
-    <div class="card-title">‘Simpsons Movie 2,’ ‘Phineas and Ferb’ Project Among First Animated Features To Land California Tax Credits</div>
-    <div class="card-excerpt">After 'Family Guy' and 'Rick and Morty' spinoffs broke the TV animation barrier, a trio of studio features will now similarly benefit.</div>
-    <div class="card-meta">
-      <span>April 23, 2026</span>
-      <a class="card-link" href="https://www.cartoonbrew.com/business/california-tax-credits-simpsons-phineas-ferb-dreamworks-260285.html" target="_blank" rel="noopener">Read full story →</a>
-    </div>
-  </div>
-</div>
+<div class="cards-grid" id="cards-grid"><!-- CARDS --></div>
 
-<!-- MORE STORIES -->
 <div class="section-header">
   <span class="section-title">More Today</span>
   <div class="section-line"></div>
 </div>
-<div class="wide-stories" id="wide-stories">
-  
-  <div class="wide-story" data-tag="Anime">
-    <div class="wide-story-tag">Anime</div>
-    <div class="wide-story-title">Anime Producer Kei Watabiki and Manga Editor Yuki Yokoi Talk 35 Years of ‘Baki’</div>
-    <div class="wide-story-meta">
-      <span>AWN · April 27, 2026</span>
-      <a class="wide-story-link" href="https://www.awn.com/animationworld/anime-producer-kei-watabiki-and-manga-editor-yuki-yokoi-talk-35-years-baki" target="_blank" rel="noopener">Read →</a>
-    </div>
+<div class="wide-stories" id="wide-stories"><!-- WIDE_STORIES --></div>
+
+<div class="section-header">
+  <span class="section-title">VFX Breakdowns</span>
+  <div class="section-line"></div>
+  <span class="section-tag">Lighting · Compositing · FX</span>
+</div>
+<div class="breakdown-grid" id="breakdown-grid"><!-- BREAKDOWN_CARDS --></div>
+
+<div class="artwork-section">
+  <div class="section-header">
+    <span class="section-title">Artwork of the Week</span>
+    <div class="section-line"></div>
+    <span class="section-tag">ArtStation · CGSociety · Behance</span>
   </div>
-  <div class="wide-story" data-tag="Festivals">
-    <div class="wide-story-tag">Festivals</div>
-    <div class="wide-story-title">Kaboom Animation Festival</div>
-    <div class="wide-story-meta">
-      <span>AWN · April 27, 2026</span>
-      <a class="wide-story-link" href="https://www.awn.com/blog/kaboom-animation-festival" target="_blank" rel="noopener">Read →</a>
-    </div>
-  </div>
-  <div class="wide-story" data-tag="TV & Streaming">
-    <div class="wide-story-tag">TV & Streaming</div>
-    <div class="wide-story-title">Exclusive Clip: ‘Family Guy - Lower G.I. Joe’</div>
-    <div class="wide-story-meta">
-      <span>AWN · April 27, 2026</span>
-      <a class="wide-story-link" href="https://www.awn.com/news/exclusive-clip-family-guy-lower-gi-joe" target="_blank" rel="noopener">Read →</a>
-    </div>
-  </div>
-  <div class="wide-story" data-tag="TV & Streaming">
-    <div class="wide-story-tag">TV & Streaming</div>
-    <div class="wide-story-title">FOX Shares Exclusive ‘American Dad!: ‘The Treasure of Old Chinatown’ Clip</div>
-    <div class="wide-story-meta">
-      <span>AWN · April 27, 2026</span>
-      <a class="wide-story-link" href="https://www.awn.com/news/fox-shares-exclusive-american-dad-treasure-old-chinatown-clip" target="_blank" rel="noopener">Read →</a>
-    </div>
-  </div>
-  <div class="wide-story" data-tag="Technology">
-    <div class="wide-story-tag">Technology</div>
-    <div class="wide-story-title">Exclusive Clip: ‘Bob’s Burgers – Keyboard Kid’</div>
-    <div class="wide-story-meta">
-      <span>AWN · April 27, 2026</span>
-      <a class="wide-story-link" href="https://www.awn.com/news/exclusive-clip-bobs-burgers-keyboard-kid" target="_blank" rel="noopener">Read →</a>
-    </div>
-  </div>
-  <div class="wide-story" data-tag="TV & Streaming">
-    <div class="wide-story-tag">TV & Streaming</div>
-    <div class="wide-story-title">Exclusive Excerpt from ‘Rick and Morty Forever #0’ 48-Page Series Finale</div>
-    <div class="wide-story-meta">
-      <span>AWN · April 27, 2026</span>
-      <a class="wide-story-link" href="https://www.awn.com/news/exclusive-excerpt-rick-and-morty-forever-0-48-page-series-finale" target="_blank" rel="noopener">Read →</a>
-    </div>
-  </div>
-  <div class="wide-story" data-tag="Anime">
-    <div class="wide-story-tag">Anime</div>
-    <div class="wide-story-title">‘My Brother the Minotaur’: A Mystical Being Embraces Community and Individuality</div>
-    <div class="wide-story-meta">
-      <span>AWN · April 27, 2026</span>
-      <a class="wide-story-link" href="https://www.awn.com/animationworld/my-brother-minotaur-mystical-being-embraces-community-and-individuality" target="_blank" rel="noopener">Read →</a>
-    </div>
-  </div>
-  <div class="wide-story" data-tag="TV & Streaming">
-    <div class="wide-story-tag">TV & Streaming</div>
-    <div class="wide-story-title">Neil Patrick Harris, Tituss Burgess and Ellie Kemper Board Mo Willems Series</div>
-    <div class="wide-story-meta">
-      <span>AWN · April 27, 2026</span>
-      <a class="wide-story-link" href="https://www.awn.com/news/neil-patrick-harris-tituss-burgess-and-ellie-kemper-board-mo-willems-series" target="_blank" rel="noopener">Read →</a>
-    </div>
-  </div>
+  <p class="artwork-intro">Hand-picked CG lighting, compositing &amp; VFX renders from the community — updated weekly.</p>
+  <div class="artwork-grid" id="artwork-grid"><!-- ARTWORK_CARDS --></div>
 </div>
 
 <footer>
   <div>
-    <div class="footer-logo">FRAMERATE</div>
-    <div class="footer-tagline">Your daily animation news digest — updated every morning automatically from the best sources in the industry.</div>
+    <div class="footer-logo">LUMINA</div>
+    <div class="footer-tagline">Your daily VFX &amp; CG industry digest — built for lighting artists, compositors, and pipeline TDs. Updated every morning automatically.</div>
   </div>
   <div>
-    <div class="footer-col-title">Sources</div>
+    <div class="footer-col-title">News Sources</div>
     <ul class="footer-links">
-      <li><a href="https://www.cartoonbrew.com" target="_blank">Cartoon Brew</a></li>
-      <li><a href="https://www.awn.com" target="_blank">Animation World Network</a></li>
-      <li><a href="https://deadline.com/category/animation/" target="_blank">Deadline Animation</a></li>
-      <li><a href="https://variety.com/v/animation/" target="_blank">Variety Animation</a></li>
+      <li><a href="https://www.fxguide.com" target="_blank">FXGuide</a></li>
+      <li><a href="https://beforesandafters.com" target="_blank">befores &amp; afters</a></li>
+      <li><a href="https://www.cgchannel.com" target="_blank">CG Channel</a></li>
+      <li><a href="https://deadline.com" target="_blank">Deadline</a></li>
+      <li><a href="https://www.awn.com" target="_blank">AWN</a></li>
     </ul>
   </div>
   <div>
-    <div class="footer-col-title">Info</div>
+    <div class="footer-col-title">Artwork</div>
     <ul class="footer-links">
-      <li><a>Updates daily at 8am UTC</a></li>
-      <li><a>Personal news digest</a></li>
-      <li><a>Built with GitHub Actions</a></li>
+      <li><a href="https://www.artstation.com/trending" target="_blank">ArtStation Trending</a></li>
+      <li><a href="https://cgsociety.org" target="_blank">CGSociety</a></li>
+      <li><a href="https://www.behance.net" target="_blank">Behance</a></li>
+      <li><a href="https://polycount.com" target="_blank">Polycount</a></li>
+    </ul>
+  </div>
+  <div>
+    <div class="footer-col-title">Tools Covered</div>
+    <ul class="footer-links">
+      <li><a>Nuke / NukeX</a></li>
+      <li><a>Katana / Arnold</a></li>
+      <li><a>Houdini / Karma</a></li>
+      <li><a>Blender / Cycles</a></li>
+      <li><a>DaVinci / Fusion</a></li>
     </ul>
   </div>
 </footer>
 <div class="footer-bottom">
-  <span>FrameRate — melanozen1's personal animation digest</span>
+  <span>LUMINA — melanozen1's personal VFX &amp; CG industry digest</span>
   <span id="footer-date"></span>
 </div>
 
 <script>
-  // Date display
   const today = new Date();
   const opts = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
   const dateStr = today.toLocaleDateString('en-US', opts);
@@ -355,75 +267,38 @@
   document.getElementById('footer-date').textContent = '© ' + today.getFullYear();
   document.getElementById('updated-tag').textContent = 'Updated ' + dateStr;
 
-  // Category filtering
+  const tagColours = { 'VFX':'#e4b84a','Pipeline':'#3ecf8e','Labour':'#f06060','Software':'#7b5cf0','Lighting':'#4f8ef7','Compositing':'#4f8ef7','Breakdown':'#e4b84a','Awards':'#3ecf8e','Industry':'#9299b0' };
+  document.querySelectorAll('.card-tag, .wide-story-tag, .sidebar-tag, .breakdown-type').forEach(el => {
+    const t = el.textContent.trim();
+    if (tagColours[t]) el.style.color = tagColours[t];
+  });
+
   function filterStories(category) {
     const all = category === 'All';
-
-    // Filter cards
-    const cards = document.querySelectorAll('#cards-grid .card');
-    let visibleCards = 0;
-    cards.forEach(card => {
-      const tag = card.getAttribute('data-tag') || '';
-      const show = all || tag.toLowerCase() === category.toLowerCase();
-      card.style.display = show ? '' : 'none';
-      if (show) visibleCards++;
+    [['#cards-grid', '.card'], ['#wide-stories', '.wide-story']].forEach(([gridSel, itemSel]) => {
+      const grid = document.querySelector(gridSel);
+      const items = grid.querySelectorAll(itemSel);
+      let visible = 0;
+      items.forEach(item => {
+        const show = all || (item.getAttribute('data-tag') || '') === category;
+        item.style.display = show ? '' : 'none';
+        if (show) visible++;
+      });
+      const visArr = [...items].filter(i => i.style.display !== 'none');
+      visArr.forEach((item, i) => { item.style.borderRight = i === visArr.length - 1 ? 'none' : '1px solid var(--border)'; });
+      let empty = grid.querySelector('.no-news');
+      if (!empty) { empty = document.createElement('div'); empty.className = 'no-news'; grid.appendChild(empty); }
+      empty.textContent = visible === 0 ? `No ${category} stories today — check back tomorrow.` : '';
+      empty.style.display = visible === 0 ? '' : 'none';
     });
-
-    // Fix card grid borders after filtering
-    const visibleCardList = [...cards].filter(c => c.style.display !== 'none');
-    visibleCardList.forEach((c, i) => {
-      c.style.borderRight = (i === visibleCardList.length - 1) ? 'none' : '1px solid var(--border)';
-    });
-
-    // Show empty state if no cards
-    let emptyCards = document.getElementById('empty-cards');
-    if (!emptyCards) {
-      emptyCards = document.createElement('div');
-      emptyCards.id = 'empty-cards';
-      emptyCards.className = 'no-news';
-      emptyCards.style.gridColumn = '1 / -1';
-      document.getElementById('cards-grid').appendChild(emptyCards);
-    }
-    emptyCards.textContent = visibleCards === 0 ? `No ${category} stories today — check back tomorrow.` : '';
-    emptyCards.style.display = visibleCards === 0 ? '' : 'none';
-
-    // Filter wide stories
-    const wides = document.querySelectorAll('#wide-stories .wide-story');
-    let visibleWides = 0;
-    wides.forEach(story => {
-      const tag = story.getAttribute('data-tag') || '';
-      const show = all || tag.toLowerCase() === category.toLowerCase();
-      story.style.display = show ? '' : 'none';
-      if (show) visibleWides++;
-    });
-
-    // Fix wide story borders after filtering
-    const visibleWideList = [...wides].filter(w => w.style.display !== 'none');
-    visibleWideList.forEach((w, i) => {
-      w.style.borderRight = (i === visibleWideList.length - 1) ? 'none' : '1px solid var(--border)';
-    });
-
-    // Show empty state for wides
-    let emptyWides = document.getElementById('empty-wides');
-    if (!emptyWides) {
-      emptyWides = document.createElement('div');
-      emptyWides.id = 'empty-wides';
-      emptyWides.className = 'no-news';
-      emptyWides.style.gridColumn = '1 / -1';
-      document.getElementById('wide-stories').appendChild(emptyWides);
-    }
-    emptyWides.textContent = visibleWides === 0 ? `No more ${category} stories today.` : '';
-    emptyWides.style.display = visibleWides === 0 ? '' : 'none';
-
-    // Update section title
-    document.querySelector('.section-title').textContent = all ? 'Latest Stories' : category + ' Stories';
+    document.getElementById('section-main-title').textContent = all ? 'Industry News' : category + ' News';
   }
 
   document.querySelectorAll('.cat-pill').forEach(pill => {
     pill.addEventListener('click', function() {
       document.querySelectorAll('.cat-pill').forEach(p => p.classList.remove('active'));
       this.classList.add('active');
-      filterStories(this.textContent.trim());
+      filterStories(this.getAttribute('data-filter'));
     });
   });
 </script>
